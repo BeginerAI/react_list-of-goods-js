@@ -23,6 +23,7 @@ export const App = () => {
   const [isReversed, setIsReversed] = useState(false);
 
   const reset = () => {
+    setSortFlag('reset');
     setIsReversed(false);
     setSortFlag(IS_LIGHT);
     setVisibileGoods(goodsFromServer);
@@ -87,11 +88,13 @@ export const App = () => {
           Reverse
         </button>
 
-        {goodsFromServer !== visibileGoods && (
+        {JSON.stringify(goodsFromServer) !== JSON.stringify(visibileGoods) && (
           <button
             onClick={reset}
             type="button"
-            className="button is-danger is-light"
+            className={cn('button is-danger', {
+              'is-light': sortFlag === 'reset',
+            })}
           >
             Reset
           </button>
